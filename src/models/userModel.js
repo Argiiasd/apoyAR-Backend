@@ -26,5 +26,9 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM("user", "admin", "moderator"),
       defaultValue: "user",
     },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   });
 };
