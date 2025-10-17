@@ -23,6 +23,7 @@ const postPetition = async (
       description: description,
       infoTransf: infoTransf,
       category: category,
+      userId: userId
     });
 
     const createdPetition = await petition.findOne({
