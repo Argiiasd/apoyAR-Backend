@@ -22,6 +22,10 @@ module.exports = (sequelize) => {
     category: {
       type: DataTypes.STRING,
     },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
     status: {
       type: DataTypes.ENUM("pending", "approved", "rejected"),
       defaultValue: "pending",
