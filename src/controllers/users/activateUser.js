@@ -21,7 +21,7 @@ const activateUser = async (id) => {
           };
         } else {
           foundUser.isActive = true;
-          foundUser.save;
+          foundUser.save();
           return {
             success: true,
             message: "Usuario activado con éxito",

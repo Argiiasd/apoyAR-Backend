@@ -2,9 +2,12 @@ const { Router } = require("express");
 const router = Router();
 
 const postUserHandler = require("../../handlers/users/postUserHandler");
+const activateUserHandler = require("../../handlers/users/activateUserHandler");
+const deactivateUserHandler = require("../../handlers/users/deactivateUserHandler");
 
 router.post("/postUser", postUserHandler);
 
-//TODO: deactivateUser/:id, getAllUsers, getAllUsersDeactivated, getUserById/:userId, editUserInfo
+router.put("/activateUser/:id", activateUserHandler);
+router.put("/deactivateUser/:id", deactivateUserHandler);
 
 module.exports = router;
