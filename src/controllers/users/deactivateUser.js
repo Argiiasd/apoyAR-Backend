@@ -21,7 +21,7 @@ const deactivateUser = async (id) => {
           };
         } else {
           foundUser.isActive = false;
-          foundUser.save;
+          foundUser.save();
           return {
             success: true,
             message: "Usuario desactivado con éxito",
