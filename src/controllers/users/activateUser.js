@@ -38,7 +38,6 @@ const activateUser = async (id) => {
     return {
       success: false,
       message: "Error al activar el usuario",
-      messageError: error.message,
     };
   }
 };

@@ -12,7 +12,7 @@ const getAllPetitions = async () => {
     } else {
       return {
         success: true,
-        petitions: foundPetitions,
+        data: foundPetitions,
       };
     }
   } catch (error) {

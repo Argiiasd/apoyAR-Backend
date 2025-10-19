@@ -10,7 +10,6 @@ module.exports = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error al recibir los datos para crear usuario",
-      messageError: error.message,
     });
   }
 };

@@ -41,7 +41,6 @@ const postPetition = async (
     return {
       success: false,
       message: "Error al crear la petición",
-      messageError: error.message,
     };
   }
 };

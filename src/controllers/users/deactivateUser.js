@@ -38,7 +38,6 @@ const deactivateUser = async (id) => {
     return {
       success: false,
       message: "Error al desactivar el usuario",
-      messageError: error.message,
     };
   }
 };
