@@ -26,8 +26,6 @@ const postPetition = async (
       userId: userId,
     });
 
-    console.log(categories);
-
     const categoryRecords = await category.findAll({
       where: { name: categories },
     });
