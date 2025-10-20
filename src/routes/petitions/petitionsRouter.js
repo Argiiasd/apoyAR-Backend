@@ -6,6 +6,7 @@ const getAllPetitionsHandler = require("../../handlers/petitions/getAllPetitions
 const getPetitionByIdHandler = require("../../handlers/petitions/getPetitionById");
 const closePetitionHandler = require("../../handlers/petitions/closePetitionHandler");
 const openPetitionHandler = require("../../handlers/petitions/openPetitionHandler");
+const editPetitionHandler = require("../../handlers/petitions/editPetitionHandler");
 
 router.post("/postPetition", postPetitionHandler);
 router.get("/getAllPetitions", getAllPetitionsHandler);
@@ -13,5 +14,6 @@ router.get("/getPetitionById/:id", getPetitionByIdHandler);
 
 router.put("/closePetition/:id", closePetitionHandler);
 router.put("/openPetition/:id", openPetitionHandler);
+router.put("/editPetition/:id", editPetitionHandler);
 
 module.exports = router;
