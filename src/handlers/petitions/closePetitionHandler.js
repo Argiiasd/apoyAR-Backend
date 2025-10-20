@@ -6,11 +6,9 @@ module.exports = async (req, res) => {
     const data = await closePetitionController(id);
     res.status(200).json(data);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error al recibir el id de la petición",
-      });
+    res.status(500).json({
+      success: false,
+      message: "Error al recibir el id de la petición",
+    });
   }
 };

@@ -7,11 +7,9 @@ module.exports = async (req, res) => {
     const data = await editPetitionController(id, updates);
     res.status(200).json(data);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error al recibir los datos para editar la petición",
-      });
+    res.status(500).json({
+      success: false,
+      message: "Error al recibir los datos para editar la petición",
+    });
   }
 };

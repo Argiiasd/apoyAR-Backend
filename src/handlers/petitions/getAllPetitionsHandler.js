@@ -5,9 +5,9 @@ module.exports = async (req, res) => {
     const data = await getAllPetitionsController();
     res.status(200).json(data);
   } catch (error) {
-    return {
+    res.status(500).json({
       success: false,
       message: "Error al recibir la lista de peticiones",
-    };
+    });
   }
 };
