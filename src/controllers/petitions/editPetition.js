@@ -24,13 +24,11 @@ const editPetition = async (id, updates) => {
       data: foundPetition,
     };
   } catch (error) {
-    console.error(error);
     return {
       success: false,
       message: "Error al modificar la petición",
     };
   }
 };
-
 
 module.exports = editPetition;
