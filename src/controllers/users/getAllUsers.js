@@ -1,16 +1,16 @@
 const { user } = require("../../db");
 
-const getAllUsers = async (page, size) => {
+const getAllUsers = async (page, size, filters = {}) => {
   try {
-    // Validar y normalizar page y size
-    const pageNum = Math.max(1, parseInt(page) || 1);  // mínimo 1
-    const limit = Math.max(1, parseInt(size) || 10);   // mínimo 1
+    const pageNum = Math.max(1, parseInt(page) || 1);
+    const limit = Math.max(1, parseInt(size) || 10);
     const offset = (pageNum - 1) * limit;
 
     const { count, rows } = await user.findAndCountAll({
+      where: filters,
       limit,
       offset,
-      attributes: ["id", "username", "email"],
+      attributes: ["id", "username", "email", "isActive"],
       order: [["createdAt", "DESC"]],
     });
 
