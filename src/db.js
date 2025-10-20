@@ -12,17 +12,23 @@ const sequelize = new Sequelize(
 const UserModel = require("./models/userModel")(sequelize);
 const PetitionModel = require("./models/petitionModel")(sequelize);
 const MediaModel = require("./models/mediaModel")(sequelize);
+const CategoryModel = require("./models/categoryModel")(sequelize);
 
-const { user, petition, media } = sequelize.models;
+const { user, petition, media, category } = sequelize.models;
 
 user.hasMany(petition);
 petition.belongsTo(user);
+
 petition.hasMany(media);
 media.belongsTo(petition);
+
+petition.belongsToMany(category, { through: "petition_category" });
+category.belongsToMany(petition, { through: "petition_category" });
 
 module.exports = {
   user,
   petition,
   media,
+  category,
   conn: sequelize,
 };

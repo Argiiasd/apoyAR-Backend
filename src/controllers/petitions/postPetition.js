@@ -1,11 +1,12 @@
 const { petition } = require("../../db");
 const { user } = require("../../db");
+const { category } = require("../../db");
 
 const postPetition = async (
   title,
   description,
   infoTransf,
-  category,
+  categories,
   userId
 ) => {
   try {
@@ -22,14 +23,19 @@ const postPetition = async (
       title: title,
       description: description,
       infoTransf: infoTransf,
-      category: category,
-      userId: userId
+      userId: userId,
     });
 
-    const createdPetition = await petition.findOne({
-      where: {
-        id: newPetition.id,
-      },
+    console.log(categories);
+
+    const categoryRecords = await category.findAll({
+      where: { name: categories },
+    });
+
+    await newPetition.addCategories(categoryRecords);
+
+    const createdPetition = await petition.findByPk(newPetition.id, {
+      include: category,
     });
 
     return {

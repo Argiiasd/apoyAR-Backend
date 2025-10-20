@@ -2,12 +2,12 @@ const postPetitionController = require("../../controllers/petitions/postPetition
 
 module.exports = async (req, res) => {
   try {
-    const { title, description, infoTransf, category, userId } = req.body;
+    const { title, description, infoTransf, categories, userId } = req.body;
     const data = await postPetitionController(
       title,
       description,
       infoTransf,
-      category,
+      categories,
       userId
     );
     res.status(200).json(data);
