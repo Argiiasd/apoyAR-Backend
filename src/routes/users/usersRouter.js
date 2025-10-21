@@ -6,6 +6,7 @@ const activateUserHandler = require("../../handlers/users/activateUserHandler");
 const deactivateUserHandler = require("../../handlers/users/deactivateUserHandler");
 const getAllUsersHandler = require("../../handlers/users/getAllUsersHandler");
 const editUserHandler = require("../../handlers/users/editUserHandler");
+const getUserByIdHandler = require("../../handlers/users/getUserByIdHandler");
 
 router.post("/postUser", postUserHandler);
 
@@ -14,5 +15,6 @@ router.put("/deactivateUser/:id", deactivateUserHandler);
 router.put("/editUser/:id", editUserHandler);
 
 router.get("/getAllUsers", getAllUsersHandler);
+router.get("/getUserById/:id", getUserByIdHandler);
 
 module.exports = router;

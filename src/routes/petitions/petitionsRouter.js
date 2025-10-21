@@ -3,7 +3,7 @@ const router = Router();
 
 const postPetitionHandler = require("../../handlers/petitions/postPetitionHandler");
 const getAllPetitionsHandler = require("../../handlers/petitions/getAllPetitionsHandler");
-const getPetitionByIdHandler = require("../../handlers/petitions/getPetitionById");
+const getPetitionByIdHandler = require("../../handlers/petitions/getPetitionByIdHandler");
 const closePetitionHandler = require("../../handlers/petitions/closePetitionHandler");
 const openPetitionHandler = require("../../handlers/petitions/openPetitionHandler");
 const editPetitionHandler = require("../../handlers/petitions/editPetitionHandler");
