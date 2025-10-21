@@ -10,7 +10,7 @@ const editUser = async (id, updates) => {
       };
     }
 
-    const protectedFields = ["id", "role", "email", "isActive", "password"];
+    const protectedFields = ["id", "role", "email", "password"];
     protectedFields.forEach((field) => delete updates[field]);
 
     Object.entries(updates).forEach(([key, value]) => {
