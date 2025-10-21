@@ -8,15 +8,14 @@ const routes = require("./routes/index");
 server.use(morgan("dev"));
 // server.use(cookieParser());
 
-const allowedOrigins = ["*"];
+// const allowedOrigins = ["*"];
 
 server.use(express.json());
 
 server.use(
   cors({
-    origin: allowedOrigins,  
-    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
-    credentials: true,
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })
 );
 
