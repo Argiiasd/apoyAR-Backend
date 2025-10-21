@@ -10,6 +10,9 @@ const editUser = async (id, updates) => {
       };
     }
 
+    const protectedFields = ["id", "role", "email", "isActive", "password"];
+    protectedFields.forEach((field) => delete updates[field]);
+
     Object.entries(updates).forEach(([key, value]) => {
       if (foundUser.dataValues.hasOwnProperty(key)) {
         foundUser[key] = value;
