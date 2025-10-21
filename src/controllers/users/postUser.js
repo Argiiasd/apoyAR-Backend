@@ -1,7 +1,7 @@
 const { user } = require("../../db");
 const bcrypt = require("bcrypt");
 
-const postUser = async (username, email, password, role) => {
+const postUser = async (username, email, password, role, profilePicture) => {
   try {
     const foundUsername = await user.findOne({
       where: {
@@ -37,6 +37,7 @@ const postUser = async (username, email, password, role) => {
         email: email,
         password: hashedPassword,
         role: role || "user",
+        profilePicture: profilePicture,
       });
 
       const createdUser = await user.findOne({
