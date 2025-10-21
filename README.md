@@ -1,6 +1,6 @@
 # 🫶 apoyAR
 
-**apoyAR** es una plataforma argentina de micromecenazgo (crowdfunding) inspirada en GoFundMe.
+**apoyAR** es una plataforma argentina de donaciones (crowdfunding) inspirada en GoFundMe.
 Permite que cualquier persona pueda **subir sus causas personales o comunitarias**, explicar **por qué necesita ayuda**, y **recibir donaciones** de manera rápida y segura.
 
 ---
