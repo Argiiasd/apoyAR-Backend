@@ -1,18 +1,15 @@
 const jwt = require("jsonwebtoken");
 
 const tokenValidate = (req, res, next) => {
-  const token = req.header("Authorization").replace("Bearer ", "");
-
-  if (!token || token === "") {
-    return res
-      .status(401)
-      .json({
-        success: false,
-        message: "No se encontró el token. Autorización denegada",
-      });
-  }
-
   try {
+    const token = req.header("Authorization").replace("Bearer ", "");
+
+    if (!token || token === "") {
+      return res.status(401).json({
+        success: false,
+        message: "Autorización denegada",
+      });
+    }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
 
@@ -20,7 +17,10 @@ const tokenValidate = (req, res, next) => {
   } catch (error) {
     return res
       .status(401)
-      .json({ success: false, message: "Token inválido. Autorización denegada" });
+      .json({
+        success: false,
+        message: "Autorización denegada",
+      });
   }
 };
 

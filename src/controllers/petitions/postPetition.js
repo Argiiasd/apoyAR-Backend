@@ -10,7 +10,7 @@ const postPetition = async (
   userId
 ) => {
   try {
-    const userFound = user.findByPk(userId);
+    const userFound = await user.findByPk(userId);
 
     if (!userFound) {
       return {
