@@ -10,7 +10,7 @@ const getAllUsers = async (page, size, filters = {}) => {
       where: filters,
       limit,
       offset,
-      attributes: ["id", "username", "email", "isActive"],
+      attributes: ["id", "username", "email", "isActive", "profilePicture", "role"],
       order: [["createdAt", "DESC"]],
     });
 

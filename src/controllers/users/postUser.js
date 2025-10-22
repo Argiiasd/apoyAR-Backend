@@ -32,32 +32,50 @@ const postUser = async (username, email, password, role, profilePicture) => {
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(password, salt);
 
-      await user.create({
-        username: username,
-        email: email,
+      const newUserData = {
+        username,
+        email,
         password: hashedPassword,
         role: role || "user",
-        profilePicture: profilePicture,
-      });
+      };
 
-      const createdUser = await user.findOne({
-        where: {
-          email: email,
-        },
-        attributes: ["id", "username", "email", "role"],
-      });
+      if(profilePicture){
+        newUserData.profilePicture = profilePicture;
+      }
+
+      const createdUser = await user.create(newUserData)
+      
+      // await user.create({
+      //   username: username,
+      //   email: email,
+      //   password: hashedPassword,
+      //   role: role || "user",
+      //   profilePicture: profilePicture,
+      // });
+
+      // const createdUser = await user.findOne({
+      //   where: {
+      //     email: email,
+      //   },
+      //   attributes: ["id", "username", "email", "role"],
+      // });
 
       return {
         success: true,
         message: "Usuario creado con éxito",
-        data: createdUser,
+        data: {
+          id: createdUser.id,
+          username: createdUser.username,
+          email: createdUser.email,
+          role: createdUser.role,
+          profilePicture: createdUser.profilePicture,
+        },
       };
     }
   } catch (error) {
     return {
       success: false,
       message: "Error al crear el usuario",
-      errorMessage: error.message,
     };
   }
 };
