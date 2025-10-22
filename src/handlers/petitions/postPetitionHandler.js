@@ -26,21 +26,17 @@ module.exports = async (req, res) => {
     }
 
     if (!infoTransf?.trim()) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "La información de transferencia es obligatoria",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "La información de transferencia es obligatoria",
+      });
     }
 
     if (!Array.isArray(categories) || categories.length === 0) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Debe incluir al menos una categoría",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Debe incluir al menos una categoría",
+      });
     }
 
     if (files.length === 0) {
