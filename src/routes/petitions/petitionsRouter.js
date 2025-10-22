@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const router = Router();
+const upload = require("../../middleware/upload");
 
 const postPetitionHandler = require("../../handlers/petitions/postPetitionHandler");
 const getAllPetitionsHandler = require("../../handlers/petitions/getAllPetitionsHandler");
@@ -8,7 +9,7 @@ const closePetitionHandler = require("../../handlers/petitions/closePetitionHand
 const openPetitionHandler = require("../../handlers/petitions/openPetitionHandler");
 const editPetitionHandler = require("../../handlers/petitions/editPetitionHandler");
 
-router.post("/postPetition", postPetitionHandler);
+router.post("/postPetition", upload.array("images", 3), postPetitionHandler);
 router.get("/getAllPetitions", getAllPetitionsHandler);
 router.get("/getPetitionById/:id", getPetitionByIdHandler);
 
