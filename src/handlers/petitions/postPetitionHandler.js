@@ -3,7 +3,7 @@ const uploadToR2 = require("../../utils/uploadToR2");
 
 module.exports = async (req, res) => {
   try {
-    const { title, description, infoTransf, categories } = req.body;
+    let { title, description, infoTransf, categories } = req.body;
     const userId = req.user.id;
     const files = req.files;
 
