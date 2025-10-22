@@ -1,13 +1,12 @@
-const { petition } = require("../../db");
-const { user } = require("../../db");
-const { category } = require("../../db");
+const { petition, user, category, media } = require("../../db");
 
 const postPetition = async (
   title,
   description,
   infoTransf,
   categories,
-  userId
+  userId,
+  uploadedImages
 ) => {
   try {
     const userFound = await user.findByPk(userId);
@@ -29,11 +28,19 @@ const postPetition = async (
     const categoryRecords = await category.findAll({
       where: { name: categories },
     });
-
     await newPetition.addCategories(categoryRecords);
 
+    if (uploadedImages && uploadedImages.length > 0) {
+      const mediaRecords = uploadedImages.map((file) => ({
+        url: file.url,
+        type: "image",
+        petitionId: newPetition.id,
+      }));
+      await media.bulkCreate(mediaRecords);
+    }
+
     const createdPetition = await petition.findByPk(newPetition.id, {
-      include: category,
+      include: [category, { model: media, as: "media" }],
     });
 
     return {
