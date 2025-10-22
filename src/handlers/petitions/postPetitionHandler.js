@@ -7,6 +7,10 @@ module.exports = async (req, res) => {
     const userId = req.user.id;
     const files = req.files;
 
+    if (typeof categories === "string") {
+      categories = JSON.parse(categories);
+    }
+
     if (!userId) {
       return res
         .status(401)
