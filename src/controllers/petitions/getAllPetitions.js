@@ -1,8 +1,14 @@
 const { petition, category, user, media } = require("../../db");
 
-const getAllPetitions = async () => {
+const getAllPetitions = async (page, size) => {
   try {
-    const foundPetitions = await petition.findAll({
+    const pageNum = Math.max(1, parseInt(page) || 1);
+    const limit = Math.max(1, parseInt(size) || 10);
+    const offset = (pageNum - 1) * limit;
+    
+    const { count, rows } = await petition.findAndCountAll({
+      limit,
+      offset,
       include: [
         {
           model: category,
@@ -21,7 +27,7 @@ const getAllPetitions = async () => {
       order: [["createdAt", "DESC"]],
     });
 
-    if (!foundPetitions || foundPetitions.length == 0) {
+    if (!rows || rows.length == 0) {
       return {
         success: false,
         message: "No se encontraron peticiones",
@@ -29,7 +35,10 @@ const getAllPetitions = async () => {
     } else {
       return {
         success: true,
-        data: foundPetitions,
+        totalPetitions: count,
+        currentPage: pageNum,
+        totalPages: Math.ceil(count / limit),
+        data: rows,
       };
     }
   } catch (error) {
