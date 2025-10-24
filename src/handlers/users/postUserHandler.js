@@ -4,14 +4,14 @@ require("dotenv").config();
 
 module.exports = async (req, res) => {
   try {
-    let { username, email, password, role } = req.body;
-    if (!role) role = "user";
+    let { username, email, password } = req.body;
 
     let profilePicture = null;
 
     if (req.file) {
       const file = req.file;
-      const fileKey = `profile-pics/${Date.now()}-${file.originalname}`;
+      const safeFileName = file.originalname.replace(/\s+/g, "_");
+      const fileKey = `profile-pics/${Date.now()}-${safeFileName}`;
 
       await s3
         .putObject({
@@ -29,7 +29,6 @@ module.exports = async (req, res) => {
       username,
       email,
       password,
-      role,
       profilePicture
     );
     res.status(200).json(data);
