@@ -1,7 +1,9 @@
 const { user } = require("../../db");
 const bcrypt = require("bcrypt");
 
-const postUser = async (username, email, password, profilePicture) => {
+//Este controlador se utiliza para postear administradores y moderadores
+
+const createUser = async (username, email, password, role, profilePicture) => {
   try {
     const foundUsername = await user.findOne({
       where: {
@@ -36,13 +38,14 @@ const postUser = async (username, email, password, profilePicture) => {
         username,
         email,
         password: hashedPassword,
+        role: role,
       };
 
-      if(profilePicture){
+      if (profilePicture) {
         newUserData.profilePicture = profilePicture;
       }
 
-      const createdUser = await user.create(newUserData)
+      const createdUser = await user.create(newUserData);
 
       return {
         success: true,
@@ -64,4 +67,4 @@ const postUser = async (username, email, password, profilePicture) => {
   }
 };
 
-module.exports = postUser;
+module.exports = createUser;

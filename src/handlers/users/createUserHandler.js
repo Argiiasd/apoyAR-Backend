@@ -1,0 +1,73 @@
+const createUserController = require("../../controllers/users/createUser");
+const s3 = require("../../services/r2");
+require("dotenv").config();
+
+module.exports = async (req, res) => {
+  try {
+    let { username, email, password, role } = req.body;
+
+    if (!username?.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "El nombre de usuario es obligatorio",
+      });
+    }
+
+    if (!email?.trim()) {
+      return res
+        .status(400)
+        .json({ success: false, message: "El email es obligatorio" });
+    }
+
+    if (!password?.trim()) {
+      return res
+        .status(400)
+        .json({ success: false, message: "La contraseña es obligatoria" });
+    }
+
+    const validRoles = ["admin", "moderator"];
+    if (!validRoles.includes(role)) {
+      return res.status(400).json({
+        success: false,
+        message: "Ingrese un rol válido (admin o moderator)",
+      });
+    }
+
+    username = username.trim();
+    email = email.trim().toLowerCase();
+    password = password.trim();
+
+    let profilePicture = null;
+
+    if (req.file) {
+      const file = req.file;
+      const safeFileName = file.originalname.replace(/\s+/g, "_");
+      const fileKey = `profile-pics/${Date.now()}-${safeFileName}`;
+
+      await s3
+        .putObject({
+          Bucket: process.env.R2_BUCKET_NAME,
+          Key: fileKey,
+          Body: file.buffer,
+          ContentType: file.mimetype,
+        })
+        .promise();
+
+      profilePicture = `${process.env.R2_PUBLIC_URL}/${fileKey}`;
+    }
+
+    const data = await createUserController(
+      username,
+      email,
+      password,
+      role,
+      profilePicture
+    );
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error al recibir los datos para crear usuario",
+    });
+  }
+};
