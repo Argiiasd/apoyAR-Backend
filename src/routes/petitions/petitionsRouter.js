@@ -10,7 +10,7 @@ const closePetitionHandler = require("../../handlers/petitions/closePetitionHand
 const openPetitionHandler = require("../../handlers/petitions/openPetitionHandler");
 const editPetitionHandler = require("../../handlers/petitions/editPetitionHandler");
 
-router.post("/postPetition", upload.array("images", 3), postPetitionHandler);
+router.post("/postPetition", tokenValidate, upload.array("images", 3), postPetitionHandler);
 router.get("/getAllPetitions", getAllPetitionsHandler);
 router.get("/getPetitionById/:id", getPetitionByIdHandler);
 
